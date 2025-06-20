@@ -33,28 +33,21 @@ contract FoundMe {
         //限制用户最低发送$1
         //1e18 = 1ETH = 1000000000000000000 Wei = 1 * 10 *18
         require(msg.value.getFinPrice(s_feed) >= minPrice, "Found false!");
-        s_founders.push(msg.sender);
+        if (s_foundersNumber[msg.sender] == 0) {
+            s_founders.push(msg.sender);
+        }
         s_foundersNumber[msg.sender] += msg.value;
     }
 
-    function withdraw() public payable onlyowner {
-        // require(foundersNumber[msg.sender] > 0,"no money at all!");
-        // foundersNumber[msg.sender] -= msg.value;
+    function withdraw() public onlyowner {
+        require(address(this).balance > 0, "No funds to withdraw");
         for (uint256 count = 0; count < s_founders.length; count++) {
             address founder = s_founders[count];
             s_foundersNumber[founder] = 0;
-            //重置数组，创建一个新的地址数组
-            s_founders = new address[](0);
-
-            // send
-            // bool sendsuccess = payable(msg.sender).send(address(this).balance);
-            // require(sendsuccess,"send false!");
-            // transfer
-            // payable(msg.sender).transfer(address(this).balance);
-            // call
-            (bool callsuccess,) = payable(msg.sender).call{value: address(this).balance}("");
-            require(callsuccess, "call false!");
         }
+        s_founders = new address[](0);
+        (bool callsuccess,) = payable(msg.sender).call{value: address(this).balance}("");
+        require(callsuccess, "call false!");
     }
 
     function getVersion() public view returns (uint256) {
