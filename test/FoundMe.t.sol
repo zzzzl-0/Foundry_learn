@@ -51,10 +51,10 @@ contract FoundMeTest is Test {
         vm.prank(user1);
         foundme.found{value: ethNumber}();
         address founder = foundme.getfounders(0);
-        assertEq(founder,user1);
+        assertEq(founder, user1);
     }
 
-    modifier fund1 {
+    modifier fund1() {
         vm.prank(user1);
         foundme.found{value: ethNumber}();
         _;
@@ -77,23 +77,23 @@ contract FoundMeTest is Test {
         uint256 endingOwnerbalance = foundme.getOwner().balance;
         uint256 endingFounderbalance = address(foundme).balance;
 
-        assertEq(endingFounderbalance,0);
-        assertEq(endingOwnerbalance,startOwnerbalance + startFounderbalance);
+        assertEq(endingFounderbalance, 0);
+        assertEq(endingOwnerbalance, startOwnerbalance + startFounderbalance);
     }
 
     function testMutpliFounders() public {
         uint160 foundernum = 10;
         uint160 starfounder = 1;
-        for(uint160 i = starfounder ; i < foundernum ; i++) {
-            hoax(address(i),ethNumbers);
-            foundme.found{value:ethNumber}();
+        for (uint160 i = starfounder; i < foundernum; i++) {
+            hoax(address(i), ethNumbers);
+            foundme.found{value: ethNumber}();
         }
         uint256 startOwnerbalance = foundme.getOwner().balance;
         uint256 startFounderbalance = address(foundme).balance;
 
         vm.prank(foundme.getOwner());
         foundme.withdraw();
-        assertEq(startOwnerbalance+startFounderbalance,foundme.getOwner().balance);
-        assertEq(address(foundme).balance ,0); 
+        assertEq(startOwnerbalance + startFounderbalance, foundme.getOwner().balance);
+        assertEq(address(foundme).balance, 0);
     }
 }
