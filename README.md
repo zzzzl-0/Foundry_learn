@@ -18,12 +18,12 @@
 git clone https://github.com/zzzzl-0/Foundry_learn.git
 cd Foundry_learn
 forge build
-```bash
+```
 
 # Test
 ```bash
 forge test 
-```bash
+```
 - 一键进行测试，包含了对脚本合于，以及主合约中大部分功能的测试
 
 # Deploy
@@ -31,7 +31,7 @@ forge test
 ```bash
 - rpc ：你打算部署的chain
 - private_key ：钱包私钥，可以是 Metemask 钱包私钥地址，注意不要用带有真实的虚拟币的地址进行部署
-```bash
+```
 
 
 
