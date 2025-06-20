@@ -65,14 +65,14 @@ contract FoundMeIntegrationTest is Test {
 
     function testReceiveFunction() public {
         vm.prank(user1);
-        (bool success, ) = address(foundme).call{value: 0.01 ether}("");
+        (bool success,) = address(foundme).call{value: 0.01 ether}("");
         assertTrue(success);
         assertEq(foundme.getfoundersNumber(user1), 0.01 ether);
     }
 
     function testFallbackFunction() public {
         vm.prank(user2);
-        (bool success, ) = address(foundme).call{value: 0.01 ether}(abi.encodePacked(bytes4(0x12345678)));
+        (bool success,) = address(foundme).call{value: 0.01 ether}(abi.encodePacked(bytes4(0x12345678)));
         assertTrue(success);
         assertEq(foundme.getfoundersNumber(user2), 0.01 ether);
     }
@@ -96,4 +96,4 @@ contract FoundMeIntegrationTest is Test {
         vm.expectRevert();
         foundme.getfounders(0);
     }
-} 
+}
