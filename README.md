@@ -1,66 +1,31 @@
-## Foundry
 
-**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
+## 📌 项目简介
 
-Foundry consists of:
+- 非常兴奋上传这个项目文件，这是我向Web3开发者迈出的第一步！
+- 这是用Foundry框架编写的简单捐赠合约实例;
+- 包括了合约的部署，以及大量的测试部分;
 
--   **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
--   **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
--   **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
--   **Chisel**: Fast, utilitarian, and verbose solidity REPL.
+## 🛠️ 技术栈
 
-## Documentation
+- Solidity
+- Foundry
 
-https://book.getfoundry.sh/
+## 📦 安装
 
-## Usage
+```bash
+# Start
+git clone https://github.com/zzzzl-0/Foundry_learn.git
+cd Foundry_learn
+forge build
 
-### Build
+# Test
+- forge test 
+- 一键进行测试，包含了对脚本合于，以及主合约中大部分功能的测试
 
-```shell
-$ forge build
-```
+# Deploy
+修改Makefile文件中的 rpc&private_key 参数
+- rpc ：你打算部署的chain
+- private_key ：钱包私钥，可以是 Metemask 钱包私钥地址，注意不要用带有真实的虚拟币的地址进行部署
 
-### Test
 
-```shell
-$ forge test
-```
 
-### Format
-
-```shell
-$ forge fmt
-```
-
-### Gas Snapshots
-
-```shell
-$ forge snapshot
-```
-
-### Anvil
-
-```shell
-$ anvil
-```
-
-### Deploy
-
-```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
-```
-
-### Cast
-
-```shell
-$ cast <subcommand>
-```
-
-### Help
-
-```shell
-$ forge --help
-$ anvil --help
-$ cast --help
-```
